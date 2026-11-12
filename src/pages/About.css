@@ -1,0 +1,68 @@
+.about__intro {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+.about__art {
+  font-size: 4rem;
+  text-align: center;
+}
+.team {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 28px;
+}
+.team__member {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 26px;
+  text-align: center;
+}
+.team__avatar {
+  font-size: 3rem;
+}
+.team__member h3 {
+  margin: 8px 0 2px;
+}
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.stat {
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 26px 16px;
+}
+.stat strong {
+  display: block;
+  font-family: var(--font-head);
+  font-size: 2rem;
+  color: var(--primary-dark);
+}
+.stat span {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 900px) {
+  .about__intro {
+    grid-template-columns: 1fr;
+  }
+  .team,
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 680px) {
+  .team,
+  .stats {
+    grid-template-columns: 1fr;
+  }
+}

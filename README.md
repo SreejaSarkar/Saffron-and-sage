@@ -1,98 +1,72 @@
-# Little Lemon Restaurant
+# Saffron & Sage 🌿
 
-Join this platform for tech, cs and project related discussion - [QuillCircuit.com](https://www.quillcircuit.com/)
+A full-stack restaurant website built with a **React** frontend and an **Express** backend.
+Browse the seasonal menu, book a table, read and leave reviews, and get in touch.
 
+## Features
 
+- **Home** — hero, highlights, and this week's featured dishes (pulled from the API)
+- **Menu** — category tabs, a "vegetarian only" filter, prices, and dietary tags
+- **Book a Table** — reservation form with live availability check and booking confirmation
+- **About** — the restaurant story, team, and stats
+- **Reviews** — read guest reviews and submit your own with a star rating
+- **Contact** — contact form, opening hours, and location info
+- **Newsletter** — email sign-up in the footer
 
-Final capstone project for Meta Front-end developer program on Coursera, which contains a detailed and responsive website with table-booking functionality built using React.
+## Project structure
 
-course link - [Meta front end development professional certificate](https://www.coursera.org/professional-certificates/meta-front-end-developer)
+```
+.
+├── public/            # CRA static assets
+├── src/               # React frontend
+│   ├── api.js         # fetch wrapper for the backend
+│   ├── components/    # Navbar, Footer, ScrollToTop
+│   └── pages/         # Home, Menu, Reservations, About, Reviews, Contact, NotFound
+└── server/            # Express backend
+    ├── index.js       # app entry + /api/info & /api/health
+    ├── data/          # menu + JSON-file store
+    └── routes/        # menu, reservations, contact, reviews, newsletter
+```
 
+## Getting started
 
-### Tech Stack:
+Install dependencies for both the client and the server:
 
-- HTML, CSS
-- JSX
-- React
+```bash
+npm install
+npm run server:install
+```
 
-### Third Party Libraries & APIs:
+### Run both at once (recommended)
 
-- react-router-dom
-- react-responsive-carousel
-- Meta front-end table-booking API
+```bash
+npm run dev
+```
 
+- Frontend: http://localhost:3000
+- Backend API: http://localhost:5000
 
-# Getting Started with Create React App
+The frontend proxies `/api` requests to the backend (see `proxy` in `package.json`).
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Run them separately
 
-## Available Scripts
+```bash
+npm run server   # start the Express API on :5000
+npm start        # start the React dev server on :3000
+```
 
-In the project directory, you can run:
+## API overview
 
-### `npm start`
+| Method | Endpoint                         | Description                        |
+| ------ | -------------------------------- | --------------------------------- |
+| GET    | `/api/info`                      | Restaurant info (address, hours)  |
+| GET    | `/api/menu`                      | Menu items (`?category=`, `?tag=`)|
+| GET    | `/api/menu/categories`           | Distinct categories               |
+| GET    | `/api/reservations/availability` | Seats left for a date/time        |
+| POST   | `/api/reservations`              | Create a reservation              |
+| POST   | `/api/contact`                   | Send a contact message            |
+| GET    | `/api/reviews`                   | List reviews                      |
+| POST   | `/api/reviews`                   | Add a review                      |
+| POST   | `/api/newsletter`                | Subscribe to the newsletter       |
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-### Author
-
-- Sreeja Sarkar
+Data is persisted to `server/data/store.json` (created automatically).

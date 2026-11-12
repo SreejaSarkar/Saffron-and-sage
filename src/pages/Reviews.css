@@ -1,0 +1,46 @@
+.reviews {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+.reviews__list {
+  display: grid;
+  gap: 18px;
+}
+.review__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.review__head h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+.review__comment {
+  color: var(--ink);
+  font-style: italic;
+  margin: 10px 0;
+}
+.review__date {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+.stars {
+  color: #d9c9a6;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+}
+.stars .is-on {
+  color: var(--primary);
+}
+.stars--input .star {
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .reviews {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,13 +1,240 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Global base: design tokens, reset, typography, and shared primitives.
+   Component- and page-specific styles live next to their JS files. */
+:root {
+  --bg: #fbf7f0;
+  --surface: #ffffff;
+  --ink: #2a2622;
+  --muted: #7a726a;
+  --primary: #b6833a;
+  --primary-dark: #8c6026;
+  --accent: #3f5d4a;
+  --accent-dark: #2f4738;
+  --line: #ece3d6;
+  --danger: #b03a2e;
+  --success: #3f6d4e;
+  --radius: 14px;
+  --shadow: 0 10px 30px rgba(42, 38, 34, 0.08);
+  --font-head: "Georgia", "Times New Roman", serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-head);
+  line-height: 1.15;
+  margin: 0 0 0.4em;
+  color: var(--ink);
+}
+
+a {
+  color: var(--accent-dark);
+  text-decoration: none;
+}
+
+/* Layout helpers */
+.container {
+  width: min(1120px, 92%);
+  margin-inline: auto;
+}
+.section {
+  padding: 64px 0;
+}
+.center {
+  text-align: center;
+}
+
+/* Text utilities */
+.muted {
+  color: var(--muted);
+}
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 0 0 0.6rem;
+}
+.link {
+  font-weight: 600;
+  color: var(--primary-dark);
+}
+.price {
+  color: var(--primary-dark);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.btn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+}
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+.btn--ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1.5px solid var(--line);
+}
+.btn--ghost:hover {
+  background: #fff;
+  border-color: var(--primary);
+}
+.btn--light {
+  background: #fff;
+  color: var(--accent-dark);
+}
+.btn--small {
+  padding: 8px 16px;
+  font-size: 0.85rem;
+}
+.link-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--primary-dark);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* Page scaffold */
+.page {
+  padding-bottom: 72px;
+}
+.page__header {
+  background: linear-gradient(180deg, #f6efe3 0%, var(--bg) 100%);
+  padding: 56px 0 40px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 40px;
+}
+.page__header h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+.page__lead {
+  color: var(--muted);
+  max-width: 60ch;
+  margin: 0;
+}
+
+/* Surfaces & forms */
+.card-surface {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 26px;
+  box-shadow: var(--shadow);
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.field > span {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.field input,
+.field select,
+.field textarea {
+  font: inherit;
+  padding: 11px 13px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink);
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(182, 131, 58, 0.15);
+}
+.field-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0 18px;
+}
+
+/* Checklist (used on reservation + auth asides) */
+.ticks {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.ticks li {
+  padding-left: 26px;
+  position: relative;
+  margin-bottom: 12px;
+  color: var(--muted);
+}
+.ticks li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+  font-weight: 700;
+}
+
+/* Alerts */
+.alert {
+  padding: 12px 14px;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  font-size: 0.92rem;
+}
+.alert ul {
+  margin: 0;
+  padding-left: 18px;
+}
+.alert--error {
+  background: #fbecea;
+  color: var(--danger);
+  border: 1px solid #f1cfc9;
+}
+.alert--success {
+  background: #eef5ef;
+  color: var(--success);
+  border: 1px solid #cfe4d4;
+}
+
+@media (max-width: 680px) {
+  .field-grid {
+    grid-template-columns: 1fr;
+  }
 }
